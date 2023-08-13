@@ -89,18 +89,10 @@ function isTriangle(a, b, c) {
   let min1 = a;
   let min2 = a;
   let max = c;
-  if (a > b) {
-    min1 = a;
-    min2 = b;
-  } else {
-    min1 = b;
-    min2 = a;
-  }
+  if (a > b) min2 = b; else min1 = b;
   if (c < min1) {
     max = min1;
     min1 = c;
-  } else {
-    max = c;
   }
   return min1 + min2 > max;
 }
