@@ -21,7 +21,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-  return arr.includes(value) ? arr.findIndex((element) => element === value) : -1;
+  return arr.indexOf(value);
 }
 
 /**
@@ -193,7 +193,7 @@ function getHead(arr, n) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
 function getTail(arr, n) {
-  return arr.slice(-n, arr.length);
+  return arr.slice(-n);
 }
 
 
@@ -218,7 +218,7 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-  return arr.map((x) => x.join(',')).join('\n');
+  return arr.map((x) => x.join()).join('\n');
 }
 
 /**
@@ -338,8 +338,21 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const nums = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  const m = arr.map((x) => nums.indexOf(x));
+  return m.sort((a, b) => a - b).map((x) => nums[x]);
 }
 
 /**
@@ -386,7 +399,7 @@ function getFalsyValuesCount(arr) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-  return arr.join(',');
+  return arr.join();
 }
 
 
@@ -416,8 +429,9 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
+function sortCitiesArray(arr) {
+  return arr.sort((a, b) => (a.country === b.country ? a.city.localeCompare(b.city)
+    : a.country.localeCompare(b.country)));
 }
 
 /**
@@ -540,8 +554,10 @@ function selectMany(arr, childrenSelector) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  let ar = arr;
+  indexes.map((x) => { ar = ar[x]; return x; });
+  return ar;
 }
 
 

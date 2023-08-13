@@ -47,9 +47,7 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-  let ret = 1;
-  if (n >= 2) ret = n * getFactorial(n - 1);
-  return ret;
+  return (n >= 2) ? n * getFactorial(n - 1) : 1;
 }
 
 
@@ -88,9 +86,9 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a, b, c) {
-  let min1;
-  let min2;
-  let max;
+  let min1 = a;
+  let min2 = a;
+  let max = c;
   if (a > b) {
     min1 = a;
     min2 = b;
@@ -379,7 +377,6 @@ function isBracketsBalanced(str) {
     }
     return arr.length === 0;
   }
-
   return removeInternal(str.split(''));
 }
 
@@ -454,8 +451,19 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const rows = m1.length;
+  const cols = m2[0].length;
+  const ret = new Array(rows);
+  for (let i = 0; i < rows; i += 1) {
+    ret[i] = new Array(cols).fill(0);
+    for (let j = 0; j < cols; j += 1) {
+      for (let k = 0; k < m1[0].length; k += 1) {
+        ret[i][j] += m1[i][k] * m2[k][j];
+      }
+    }
+  }
+  return ret;
 }
 
 
