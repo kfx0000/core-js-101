@@ -252,7 +252,7 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-  return arr.reduce((a, x, i) => [...a, x + a[i]], [0]).slice(1);
+  return arr.reduce((a, x, i) => a.concat(x + a[i]), [0]).slice(1);
 }
 
 /**
@@ -285,8 +285,8 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  return arr.reduce((a, x, i) => a.concat(Array.from({ length: i + 1 }, () => x)), []);
 }
 
 
@@ -303,8 +303,8 @@ function propagateItemsByPositionIndex(/* arr */) {
  *   [ 1,2,3,4,5,6,7,8,9,10 ] => [ 10, 9, 8 ]
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
-function get3TopItems(/* arr */) {
-  throw new Error('Not implemented');
+function get3TopItems(arr) {
+  return arr.sort((a, b) => b - a).slice(0, 3);
 }
 
 
@@ -438,8 +438,9 @@ function sortCitiesArray(/* arr */) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array.from({ length: n }, (x, i) => Array.from({ length: n },
+    (y, j) => (i === j ? 1 : 0)));
 }
 
 /**
@@ -470,8 +471,8 @@ function getIntervalArray(start, end) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  return arr.reduce((a, x) => (a.includes(x) ? a : a.concat(x)), []);
 }
 
 /**
@@ -562,8 +563,14 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  let ret = [];
+  if (arr.length < 2) ret = arr; else {
+    ret = (arr.length % 2 === 1) ? [].concat(arr.slice(-Math.floor(arr.length / 2)),
+      arr[Math.floor(arr.length / 2)], arr.slice(0, Math.floor(arr.length / 2)))
+      : [].concat(arr.slice(-arr.length / 2), arr.slice(0, arr.length / 2));
+  }
+  return ret;
 }
 
 
