@@ -501,8 +501,32 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  const winarr = ['123', '456', '789', '147', '258', '369', '159', '357'];
+  let res;
+  let O = '';
+  let X = '';
+
+  function isWin(n) {
+    for (let i = 0; i < 8; i += 1) {
+      let s = winarr[i];
+      for (let j = 0; j < n.length; j += 1) {
+        s = s.replace(n[j], '');
+      }
+      if (s.length === 0) return true;
+    }
+    return false;
+  }
+
+  for (let i = 0; i < 3; i += 1) {
+    for (let j = 0; j < 3; j += 1) {
+      if (position[i][j] === '0') O += (j + 1) + (i * 3);
+      else if (position[i][j] === 'X') X += (j + 1) + (i * 3);
+    }
+  }
+  if (isWin(O)) res = '0';
+  else if (isWin(X)) res = 'X';
+  return res;
 }
 
 
